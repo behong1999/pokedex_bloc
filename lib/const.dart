@@ -22,3 +22,9 @@ final typeColor = {
   'ground': const Color(0xFFE3C969),
   'flying': const Color(0xFF81A2F8),
 };
+
+ bool isNumericUsingRegularExpression(String string) {
+    final numericRegex = RegExp(r'^-?(([0-9]*)|(([0-9]*)\.([0-9]*)))$');
+
+    return numericRegex.hasMatch(string);
+  }

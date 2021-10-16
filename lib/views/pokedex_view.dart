@@ -3,11 +3,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokedex_bloc/bloc/nav_cubit.dart';
 import 'package:pokedex_bloc/const.dart';
 import 'package:pokedex_bloc/widgets/scroll_to_hide.dart';
+import 'package:pokedex_bloc/widgets/search.dart';
 import 'package:pokedex_bloc/widgets/warning.dart';
 
-import 'bloc/pokemon_bloc.dart';
+import '../bloc/pokemon_bloc.dart';
 
 class PokedexView extends StatefulWidget {
+ 
+ 
+
   @override
   _PokedexViewState createState() => _PokedexViewState();
 }
@@ -20,8 +24,19 @@ class _PokedexViewState extends State<PokedexView> {
   @override
   void initState() {
     super.initState();
+
     // controller = ScrollController();
   }
+
+  // @override
+  // void didChangeDependencies() {
+  //   // TODO: implement didChangeDependencies
+  //   super.didChangeDependencies();
+    // if (widget.pkmId == -1) {
+    //   ScaffoldMessenger.of(context)
+    //       .showSnackBar(SnackBar(content: Text("Invalid Input!")));
+    // }
+  // }
 
   @override
   void dispose() {
@@ -38,6 +53,8 @@ class _PokedexViewState extends State<PokedexView> {
         centerTitle: true,
         title: const Text('Pokédex'),
       ),
+      floatingActionButton: SearchBar(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
       body: BlocBuilder<PokemonBloc, PokemonState>(
         builder: (context, state) {
           if (state is PokemonInitial) {

@@ -4,7 +4,7 @@ import 'package:pokedex_bloc/app_navigator.dart';
 import 'package:pokedex_bloc/bloc/nav_cubit.dart';
 import 'package:pokedex_bloc/bloc/pokemon_bloc.dart';
 import 'package:pokedex_bloc/bloc/pokemon_details_cubit.dart';
-import 'package:pokedex_bloc/pokedex_view.dart';
+import 'package:pokedex_bloc/views/pokedex_view.dart';
 
 void main() {
   runApp(MyApp());

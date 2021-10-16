@@ -5,6 +5,8 @@ import 'package:pokedex_bloc/data/pokemon_info_response.dart';
 import 'package:pokedex_bloc/data/pokemon_repository.dart';
 import 'package:pokedex_bloc/data/pokemon_species_response.dart';
 
+import '../const.dart';
+
 class PokemonDetailsCubit extends Cubit<PokemonDetails> {
   final _pokemonRepository = PokemonRepository();
 
@@ -12,24 +14,28 @@ class PokemonDetailsCubit extends Cubit<PokemonDetails> {
 
   void getPokemonDetails(int pokemonId) async {
     //? Future.wait starts both asynchronous functions at the same time
-    final response = await Future.wait([
-      _pokemonRepository.getPokemonInfo(pokemonId),
-      _pokemonRepository.getPokemonSpeciesInfo(pokemonId),
-    ]);
+    try {
+      final response = await Future.wait([
+        _pokemonRepository.getPokemonInfo(pokemonId),
+        _pokemonRepository.getPokemonSpeciesInfo(pokemonId),
+      ]);
 
-    final pokemonInfo = response[0] as PokemonInfoResponse;
-    final pokemonSpecies = response[1] as PokemonSpeciesInfoReponse;
+      final pokemonInfo = response[0] as PokemonInfoResponse;
+      final pokemonSpecies = response[1] as PokemonSpeciesInfoReponse;
 
-    emit(PokemonDetails(
-      id: pokemonId,
-      name: pokemonInfo.name,
-      imageUrl: pokemonInfo.imageUrl,
-      backImageUrl: pokemonInfo.backImageUrl,
-      types: pokemonInfo.types,
-      height: pokemonInfo.height,
-      weight: pokemonInfo.weight,
-      description: pokemonSpecies.description,
-    ));
+      emit(PokemonDetails(
+        id: pokemonId,
+        name: pokemonInfo.name,
+        imageUrl: pokemonInfo.imageUrl,
+        backImageUrl: pokemonInfo.backImageUrl,
+        types: pokemonInfo.types,
+        height: pokemonInfo.height,
+        weight: pokemonInfo.weight,
+        description: pokemonSpecies.description,
+      ));
+    } catch (error) {
+      throw Exception(error);
+    }
   }
 
   //* Used to Clear the Pokemon Details STATE

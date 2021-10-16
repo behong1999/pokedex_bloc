@@ -49,4 +49,17 @@ class PokemonRepository {
     final json = jsonDecode(response.body);
     return PokemonSpeciesInfoReponse.fromJson(json);
   }
+
+  Future<int> getPokemonIdFromName(String name) async {
+    final uri = Uri.https(baseUrl, '/api/v2/pokemon/$name');
+
+    try {
+      final response = await client.get(uri);
+      final json = jsonDecode(response.body);
+
+      return PokemonInfoResponse.fromJson(json).id;
+    } catch (error) {
+      print(error);
+    }
+  }
 }
