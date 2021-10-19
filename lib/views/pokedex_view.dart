@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokedex_bloc/bloc/nav_cubit.dart';
 import 'package:pokedex_bloc/const.dart';
+import 'package:pokedex_bloc/views/error_view.dart';
 import 'package:pokedex_bloc/widgets/scroll_to_hide.dart';
 import 'package:pokedex_bloc/widgets/search.dart';
 import 'package:pokedex_bloc/widgets/warning.dart';
@@ -9,9 +10,6 @@ import 'package:pokedex_bloc/widgets/warning.dart';
 import '../bloc/pokemon_bloc.dart';
 
 class PokedexView extends StatefulWidget {
- 
- 
-
   @override
   _PokedexViewState createState() => _PokedexViewState();
 }
@@ -27,16 +25,6 @@ class _PokedexViewState extends State<PokedexView> {
 
     // controller = ScrollController();
   }
-
-  // @override
-  // void didChangeDependencies() {
-  //   // TODO: implement didChangeDependencies
-  //   super.didChangeDependencies();
-    // if (widget.pkmId == -1) {
-    //   ScaffoldMessenger.of(context)
-    //       .showSnackBar(SnackBar(content: Text("Invalid Input!")));
-    // }
-  // }
 
   @override
   void dispose() {
@@ -63,14 +51,7 @@ class _PokedexViewState extends State<PokedexView> {
           }
           if (state is PokemonPageLoadFailed) {
             return Center(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  WarningIcon(),
-                  const Text(' CONNECTION FAILED '),
-                  WarningIcon()
-                ],
-              ),
+              child: ErrorView(count),
             );
           }
 
