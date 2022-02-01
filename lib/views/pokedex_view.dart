@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:overlay_support/overlay_support.dart';
 import 'package:pokedex_bloc/bloc/nav_cubit.dart';
 import 'package:pokedex_bloc/const.dart';
 import 'package:pokedex_bloc/views/error_view.dart';
 import 'package:pokedex_bloc/widgets/scroll_to_hide.dart';
 import 'package:pokedex_bloc/widgets/search.dart';
 import 'package:pokedex_bloc/widgets/warning.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 
 import '../bloc/pokemon_bloc.dart';
 
@@ -16,12 +19,28 @@ class PokedexView extends StatefulWidget {
 
 class _PokedexViewState extends State<PokedexView> {
   var count = 0;
-
+  bool internetStatus = false;
+  ConnectivityResult result = ConnectivityResult.none;
   ScrollController controller = ScrollController();
 
   @override
   void initState() {
     super.initState();
+    InternetConnectionChecker().onStatusChange.listen((event) {
+      final internetStatus = event == InternetConnectionStatus.connected;
+      setState(() {
+        this.internetStatus = internetStatus;
+      });
+      final text = internetStatus == true
+          ? "Internet Connected"
+          : "Internet Disconnected";
+      final color = internetStatus == true ? Colors.green : Colors.purple;
+      showSimpleNotification(
+          Text(text,
+              textAlign: TextAlign.center,
+              style: const TextStyle(color: Colors.white, fontSize: 20)),
+          background: color);
+    });
 
     // controller = ScrollController();
   }

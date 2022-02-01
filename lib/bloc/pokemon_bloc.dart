@@ -13,9 +13,9 @@ class PokemonBloc extends Bloc<PokemonEvent, PokemonState> {
 
   @override
   Stream<PokemonState> mapEventToState(PokemonEvent event) async* {
-    // TODO: implement mapEventToState
     if (event is PokemonPageRequest) {
       yield PokemonPageLoading();
+
       try {
         final pokemonPageResponse =
             await _pokemonRepository.fetchPokemonPage(event.page);
