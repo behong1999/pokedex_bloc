@@ -21,4 +21,3 @@ A Flutter project as A Pokédex For Pokémon Lovers.
 ### Screenshots &#128248;
 <img src="https://user-images.githubusercontent.com/44105063/152048855-0e1a7301-15f6-4e63-acc5-03e82947f1e8.jpg" width="500" height="800">
 <img src="https://user-images.githubusercontent.com/44105063/152048867-313f7a60-1b58-4d7c-bbe4-0192c5d9a9c9.jpg" width="500" height="800">
-<img src="https://user-images.githubusercontent.com/44105063/152048878-ceb624d9-4488-47f8-9cb0-2e4c4c68d522.jpg" width="500" height="800">
