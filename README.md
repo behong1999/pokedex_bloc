@@ -19,5 +19,5 @@ A Flutter project as A Pokédex For Pokémon Lovers.
 - [Poke API](https://pokeapi.co/)
 
 ### Screenshots &#128248;
-<img src="https://user-images.githubusercontent.com/44105063/152048855-0e1a7301-15f6-4e63-acc5-03e82947f1e8.jpg" width="500" height="800">
-<img src="https://user-images.githubusercontent.com/44105063/152054980-2bfee19e-436a-46c8-bc52-a7bffe71fdad.jpg" width="500" height="800">
+<img src="https://user-images.githubusercontent.com/44105063/152048855-0e1a7301-15f6-4e63-acc5-03e82947f1e8.jpg" width="330" height="550">
+<img src="https://user-images.githubusercontent.com/44105063/152055075-768b6b40-6410-478c-bf1b-90fb555d6bc7.jpg" width="330" height="550">
