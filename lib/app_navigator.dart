@@ -18,10 +18,12 @@ class AppNavigator extends StatelessWidget {
         onWillPop: (() async => !await _navigatorKey.currentState.maybePop()),
         child: Navigator(
           key: _navigatorKey,
-
+          // observers: [HeroController()],
           //* Stacking each of these pages on top of each other based on the logic specified
           pages: [
-            MaterialPage(child: PokedexView()),
+            MaterialPage(
+              child: PokedexView(),
+            ),
             if (pkmId != null && pkmId != -1)
               MaterialPage(child: PokemonDetailsView()),
             // if (pkmId == -1) MaterialPage(child: ErrorView())
