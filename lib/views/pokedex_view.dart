@@ -26,7 +26,7 @@ class _PokedexViewState extends State<PokedexView> {
 
   _scrollLimit() {
     if (controller.offset >= controller.position.maxScrollExtent &&
-        controller.position.outOfRange) {
+        !controller.position.outOfRange) {
       showSimpleNotification(
           const Text("Reach The Bottom",
               textAlign: TextAlign.center,
@@ -34,7 +34,8 @@ class _PokedexViewState extends State<PokedexView> {
           background: Colors.red,
           duration: const Duration(seconds: 2));
     }
-    if (controller.offset <= controller.position.minScrollExtent) {
+    if (controller.offset <= controller.position.minScrollExtent &&
+        !controller.position.outOfRange) {
       showSimpleNotification(
           const Text("Reach The Top",
               textAlign: TextAlign.center,
