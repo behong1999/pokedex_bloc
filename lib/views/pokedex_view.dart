@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
@@ -7,7 +9,6 @@ import 'package:pokedex_bloc/const.dart';
 import 'package:pokedex_bloc/views/error_view.dart';
 import 'package:pokedex_bloc/widgets/scroll_to_hide.dart';
 import 'package:pokedex_bloc/widgets/search.dart';
-import 'package:pokedex_bloc/widgets/warning.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 
 import '../bloc/pokemon_bloc.dart';
@@ -23,9 +24,30 @@ class _PokedexViewState extends State<PokedexView> {
   ConnectivityResult result = ConnectivityResult.none;
   ScrollController controller = ScrollController();
 
+  _scrollLimit() {
+    if (controller.offset >= controller.position.maxScrollExtent &&
+        controller.position.outOfRange) {
+      showSimpleNotification(
+          const Text("Reach The Bottom",
+              textAlign: TextAlign.center,
+              style: TextStyle(color: Colors.white, fontSize: 20)),
+          background: Colors.red,
+          duration: const Duration(seconds: 2));
+    }
+    if (controller.offset <= controller.position.minScrollExtent) {
+      showSimpleNotification(
+          const Text("Reach The Top",
+              textAlign: TextAlign.center,
+              style: TextStyle(color: Colors.white, fontSize: 20)),
+          background: Colors.red,
+          duration: const Duration(seconds: 2));
+    }
+  }
+
   @override
   void initState() {
     super.initState();
+    controller.addListener(_scrollLimit);
     InternetConnectionChecker().onStatusChange.listen((event) {
       final internetStatus = event == InternetConnectionStatus.connected;
       setState(() {
@@ -39,7 +61,8 @@ class _PokedexViewState extends State<PokedexView> {
           Text(text,
               textAlign: TextAlign.center,
               style: const TextStyle(color: Colors.white, fontSize: 20)),
-          background: color);
+          background: color,
+          duration: const Duration(seconds: 10));
     });
 
     // controller = ScrollController();
